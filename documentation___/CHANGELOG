@@ -1,0 +1,203 @@
+ Open-Letters Newslettersystem: Changelog
+*******************************************
+
+ Version 1.0.7 (02.12.2015)
+------------------------------------------------------------------------
+
+    BugFixes zur Version 1.0.6:
+        - Es wurden Notice-Ausgaben bzgl. fehlender GET-Parameter in der Admin-
+          Oberfläche entfernt.
+        - Das Klicken des Double-OptIn-Links erzeugte (trotz Erfolg) keine Ausgabe.
+        - Das Die Verarbeitung der Migrations-Updates war nicht hinreichend abwärtskompatibel.
+          Sie arbeitet dann keine DB-Änderungen ab, wenn es die Migrationen-Tabelle
+          noch nicht gibt.
+
+    Erweiterung zum System "UserGruppen":
+        - Die DB-Tabellen für NewsletterGruppen und die Zugehörigkeit der User 
+          werden eingeführt. Diese FUnktionen sind nur "vorbereitet" und bieten
+          aktuell noch NICHT die Möglichkeit, einen Newsletter nur an eine begrenzte
+          Teilmenge der registrierten User zu senden.
+        - Neue User werden erst dann als zu einer Gruppe zugehörig eingetragen,
+          wenn in der Gruppen-DB bestimmte UserGruppen angelegt wurden. Damit 
+          werden diese Änderungen hier vorerst für den Betrieb keine Auswirkungen
+          haben.
+        - Das Sytsem zur Abfrage des letzten eingefügten Primärschlüssels arbeitet
+          in PDO nicht zuverlässig. Es hat nun eine FallBack-Methode bekommen, 
+          welche die größte "ID" der DB-Tabelle ermittelt.
+
+ Version 1.0.6 (11.05.2015)
+------------------------------------------------------------------------
+    BugFixes:
+        - Zur Verbesserung der Sicherheit wird der Editor "TinyMCE" samt dem 
+          Plugin "AjaxFilemanager" in das admin-Verzeichnis verschoben.
+
+ Version 1.0.5 (27.10.2014)
+------------------------------------------------------------------------
+    BugFixes:
+        - Die neue Funktion mit dem Haken zur "Einverständniserklärung" (siehe
+          Version 1.0.3) machte die selbe Funktion in der Admin-Oberfläche unbenutzbar.
+          Ein dort ebenfalls eingefügter Haken löst das Problem und informiert nun
+          über die auch dort automatisch versendete Double-OptIn E-Mail.
+        - Schreibfehler im extras/phpMailerSmtpTest.php behoben (Danke Werbeagentur
+          Dr. Peter Gruber)
+        - Überarbeitung der Funktion "Empfänger löschen" in der Admin-Oberfläche
+        - BugFixes an der geänderten API des PHPMailers 5.2.8
+        - BugFix an evtl. auftretenden Fehlern bei DB-Anfragen über Prepared Statements
+
+    Erweiterungen:
+        - SafetyManager: Die IP-Adresse "::1" wurde zu den lokalen IPs hinzugefügt.
+          Damit darf das System auch von ::1 aufgerufen werden, wenn die Verzeichnisse
+          "documentation" und "extras" vorhanden sind.
+        - Das Newsletter-System unterstützt nun den E-Mail-Versand per "Sendmail",
+          also ganz ohne SMTP und über den PHP-Befehl mail(). Die FAQ-Datei enthält
+          eine Anleitung, wie dies eingerichtet werden kann.
+
+    Dokumentation:
+        - Die CHANGELOG-Datei wurde auf eine Maximalbreite 95 Zeichen umformatiert.
+        - Eine FAQ-Datei wurde in das Verzeichnis documentation eingefügt und mit
+          ersten Inhalten befüllt.
+
+ Version 1.0.4 (29.09.2014)
+------------------------------------------------------------------------
+    BugFixes:
+        - Fehler-Korrektur am Test extras/phpMailerSmtpTest.php: Eventuell auftretende
+          Probleme wurden nicht richtig reported.
+
+ Version 1.0.3 (29.09.2014)
+------------------------------------------------------------------------
+    Erweiterungen:
+        - Die SMTP-Verbindung ohne Authentifizierung wird nun unterstützt. Es reicht
+          dafür, eine der beiden Konstanten SMTP_USER oder SMTP_PASSWORD nicht auszufüllen.
+        - Das öffentliche Anmeldeformular hat nun einen zusätzlichen Haken mit Einverständnis-
+          erklärung. Die Zustimmung ist verpflichtend für das Absenden der Anmeldung.
+
+    Code-Cleanup:
+        - Die Initialisierung des PHPMailers wurde in der Methode Newsletter::initMailer()
+          zentralisiert.
+
+    Updates:
+        - Der PHPMailer wird von Version 5.0.0 auf Version 5.2.8 aktualisiert.
+
+ Version 1.0.2 (10.09.2014)
+------------------------------------------------------------------------
+    BugFixes:
+        - Expand database class to check if PDO is available and connection can be 
+          established.
+
+ Version 1.0.1 (07.08.2014)
+------------------------------------------------------------------------
+    BugFixes:
+        - Expanded output information for non-writable logfile.
+        - Repaired non-valid HTML in subscription form.
+
+    Änderungen:
+        - Das Default-Layout des Frontend wurde umgestellt und zeigt nun an sensiblen
+          Stellen wie Impressum nicht mehr auf Open-Letters.de.
+        - Die Default-Templates für Newsletter wurden von der Domain Open-Letters.de
+          gelöst und zeigen nun auf example.com.
+
+    Erweiterungen:
+        - Wie zuvor das Verzeichnis "extras" darf in einer Produktivumgebung nun 
+          auch das Verzeichnis "documentation" nicht vorhanden sein. Die zwei index.php
+          und newsletter_view.php unterbinden dies.
+        - Die Datei LIESMICH.txt wurde überarbeitet und erweitert.
+
+
+ Version 1.0 (30.07.2014)
+------------------------------------------------------------------------
+    BugFixes:
+        - In bestimmten MySQL-konfigurationen kann bemängelt werden, dass ein neuer 
+          Newsletter-Eintrag ohne Inhalt ("content") eingefügt wurde. Jetzt wird 
+          ein leerer Paragraph eingefügt.
+        - Der Schreibfehler SMPT_PASSWORD wurde nun (abwärtskompatibel) behoben.
+        - Die LogDatei heißt nun open-letters.log (statt zuvor log.php).
+        - SMTP-Fehlermeldungen des PHPMailers landen nun NUR noch in der Logdatei
+          und nicht auf dem Bildschirm (in der Anmeldung des Newsletter-Empfänger 
+          und beim Versand der Newsletter-E-Mails). Damit werden viele Abbrüche im
+          Versandprozess gelöst.
+        - Durch den Umbau auf PDO und PreparedStatements wurde ein Bug gelöst, der
+          das Speichern von Newsletter-Einträgen mit einfachem Anführungszeichen ' 
+          im Text nicht möglich machte.
+
+    Erweiterungen:
+        - Die Liste der Templatevorlagen für Newsletter zeigt nun per MouseOver den
+          Namen des Templates an.
+        - Die index-Dateien erzwingen nun, dass das Verzeichnis "extras" nicht mit
+          auf dem Server liegt.
+        - Ein Hilfs-Skript extras/phpMailerSmtpTest.php erlaubt nun das Testen der
+          SMTP-Zugangsdaten. Die Verwendung wurde in documentation/LIESMICH.txt
+          erläutert.
+        - Das htaccess-Hilfsprogramm wurde umgebaut. Es liefert nun mehr Informationen
+          und muss nicht mehr ins Top-Verzeichnis kopiert werden.
+        - Die Anmeldung von Newsletter-Empfängern schlägt nun fehl, wenn dem Empfänger
+          keine Double-OptIn-Mail zugestellt werden kann. In diesem Fall wird der
+          Empfänger auch nicht in die Datenbank eingetragen.
+        - Die Datenbankklasse des Systems wurde auf die Verwendung von PDO umgebaut
+          und erlaubt damit, in Zukunft ein anderes Datenbanksystem als MySQL zu 
+          verwenden. Das Frontend wurde dabei vollständig auf die Verwendung von 
+          "Prepared Statements" angepasst und ist damit erheblich schneller und 
+          sicherer als zuvor (SQL-Injections).
+        - Die im PHPMailer bereits enthaltene Möglichkeit zur verschlüsselten Verbindung
+          mit dem SMTP-Server ist nun per Einstellung in der Datei config/config.inc.php
+          nutzbar: Es gibt dafür nun eine neue Einstellung SMTP_SECURITY.
+
+    Cleanups:
+        - Der Fortschirttsbalken im Versandprozess ist nun ein eigener View.
+        - Das temporäre Verzeichnis des HTML-Purifiers wurde aufgeräumt.e und die 
+          folgenden Zeilen werden ignoriert --
+
+
+ Version 0.36 - 0.42 (08.04.2013)
+------------------------------------------------------------------------
+    BugFixes:
+        - TinyMCE wurde das Konvertieren von URLs abgewöhnt. Dadurch sollten die 
+          Pfade der Bilder nun nicht mehr beim 2ten Speichern zerwürgt werden.
+        - Die Erstellung des Double-OptIn-Links in der Registrierungs-E-Mail konnte
+          noch nicht damit umgehen, dass der URL des NL-Systems in der config.inc.php
+          mit und ohne abschließendes Slash / geschrieben sein kann. Dies ist behoben.
+        - Direkt vor dem Versand der Newsletter-E-Mail wird die E-Mail-Adresse nochmal
+          geprüft und ggf. übersprungen
+
+    Erweiterungen:
+        - Die beiden Abschnitte des Backends (Newsletter- und NL-Empfänger-Verwaltung)
+          werden nun als Tabs dargestellt.
+        - Der GET-Parameter "lang"=[en|de] ist nun erlaubt.
+
+
+ Version 0.16 - 0.28 (06.10.2012) 
+------------------------------------------------------------------------
+    BugFixes:
+        - Die Verwendung der Konstante ROOT_DOMAIN aus der Config-Datei wurden an
+          allen Stellen zu rtrim(ROOT_DOMAIN, "/")."/" geändert. Damit kann der 
+          Admin ein / angeben, muss es aber nicht.
+        - Der Versandprozess wurde überarbeitet. Es gabe Probleme bei der Erkennung
+          der Fertigstellung des Versendens.
+        - Der AjaxFileManager wusste nicht, dass er im TinyMCE-Modus laufen soll. 
+          Daher bot er die Auswahl einer Bilddatei nicht an. (Danke an Tobias Scheck
+          für den Hinweis)
+        - Die Datenbankklasse erzwingt nun UTF8.
+        - Der Import der Newsletter-Empfänger aus einer CSV-Datei wurde überarbeitet.
+
+    Erweiterung 'Markierung statt Löschung gelöschter NL-Empfänger':
+        - NewsletterEmpfänger werden nun beim Austragen/Abmelden nicht mehr gelöscht,
+          sondern als gelöscht markiert. Dadurch wird verhindert, dass diese Empfänger
+          aus einer externen Quelle versehentlich neu importiert werden. (Danke an Bernd
+          Krüger-Knauber)
+        - Die Liste der Newsletter-Empfänger in der Admin-Oberfläche zeigt nun auch
+          "gelöschte" Empfänger an. Sie sind optisch und texlich als "gelöscht" 
+          markiert.
+        - Die als "gelöscht" markierten Newsletter-Empfänger erlauben ein "endgültiges
+          Löschen" (wie es nach dem dt. Datenscutzgesetz notwendig sein kann).
+
+    Erweiterung UpdateSystem:
+        - Das NL-System beinhaltet nun ein Updatesystem: Jede Datei im Verzeichnis 
+          admin/updates/ wird bei Aufruf von admin/update.php inkludiert.
+        - Diese Funktionalität wird hier genutzt, die Spalte "aktiv" in die DB-Tabelle
+          "newsletter" in bestehenden Installationen einzufügen und zu befüllen.
+        - Achtung: Updates müssen so erstellt werden, dass sie ohne Schaden bei 
+          wiederholtem Aufruf von update.php erneut inkludiert werden können!
+
+    Erweiterungen:
+        - Neue User, die sich im Frontend anmelden, bekommen nun eine Double-Opt-In
+          E-Mail mit einem Link zur Anmeldung zugestellt. Erst nach Klick des Links
+          gilt der User als angemeldet.

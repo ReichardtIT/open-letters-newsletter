@@ -1,0 +1,183 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="style/open-letters-doc.css" type="text/css" />
+    </head>
+    <body>
+        <div id="content">
+            
+            <h1>Open-Letters Newslettersystem - Installation</h1>
+            <span class="changes">letzte Änderung: 2014-12-30, Stefan Rank-Kunitz</span>
+            
+            <h2>Übersicht:</h2>
+            Die Installation des Open-Letters Newslettersystems gliedert sich, wie bei den
+            meisten PHP-basierten Programmen, in diese Schritte:
+            <ul>
+                <li><a href="#upload">Upload der Dateien und Verzeichnisse (per FTP) Verzeichnis-Rechte setzen</a></li>
+                <li><a href="#datenbank">Datenbank aufsetzen und Inhalte importieren</a></li>
+                <li><a href="#config">Konfigurations-Datei anpassen</a></li>
+            </ul>
+            Für diese Software haben wir weitere, optionale, jedoch dringend empfohlene
+            Arbeitsschritte eingefügt:
+            <ul>
+                <li><a href="#updates">Einspielen von Datenbank-Updates</a></li>
+                <li><a href="#emailversand">Testen des E-Mail-Versandes</a></li>
+                <li><a href="#htaccess">Absicherung der Admin-Oberfläche</a></li>
+                <li><a href="#hilfe">Weitere Hilfe, Problemlösung, Anleitungen</a></li>
+            </ul>
+
+            <a name="upload"></a>
+            <h2>a) Download, FTP-Upload, Rechte setzen:</h2>
+                <p>Laden Sie das Newslettersystem von unserer Website <a class="external"
+                href="http://www.open-letters.de">http://www.open-letters.de</a> herunter.
+                Entpacken Sie die Zip-Datei und laden Sie alle Dateien und Verzeichnisse
+                mit Hilfe eines FTP-Programms auf Ihren Webspace. Ein sehr gutes und kostenloses 
+                FTP-Programm ist das Programm <strong>FileZilla</strong> von 
+                <a href="https://filezilla-project.org/download.php?show_all=1" class="external">
+                https://filezilla-project.org/download.php?show_all=1</a></p>
+            <p>Bearbeiten Sie mit Hilfe Ihres FTP-Programms die folgenden Dateien und Verzeichnisse
+                so, dass der Webserver dort Dateien ablegen kann:</p>
+            <ul>
+                <li>das Verzeichnis <span class="file">./uploaded</span></li>
+                <li>die 3 Unterverzeichnisse <span class="file">HTML</span>,
+                    <span class="file">CSS</span> und <span class="file">URI</span> des Ordners<br>
+                    <span class="file">./external_scripts/htmlpurifier-4.0.0-lite/library/HTMLPurifier/DefinitionCache/Serializer</span></li>
+                <li>die Datei <span class="file">log.txt</span> im Verzeichnis <span class="file">config</span>
+                    (Hinweis: In neueren Versionen heißt die Datei log.txt => log.php oder open-letters.log!!!)</li>
+                <li>das Verzeichnis <span class="file">./external_scripts/tinymce/plugins/ajaxfilemanager/session</span>
+                    zum Upload von Bildern über den Ajax Filemanager</li>
+            </ul>
+            <p>In FileZilla nehmen Sie diese Änderung vor, indem Sie die betreffende Datei/das 
+                betreffende Verzeichnis mit der rechten Maustaste anklicken und alle 3 Haken 
+                für "Schreiben" aktivieren.</p>
+
+            <a name="datenbank"></a>
+            <h2>b) Datenbank-Setup:</h2>
+            <p>Öffnen Sie die Oberfläche, die Ihnen Ihr Webspace-Anbieter zur Verwaltung 
+                Ihres Webspace und Ihrer Datenbanken zur Verfügung stellt. Legen Sie in 
+                dieser Oberfläche eine neue MySQL-Datenbank an und notieren Sie sich die
+                Zugangsdaten zu dieser Datenbank (Internet-Adresse der Datenbank, Benutzername,
+                Passwort, Name der Datenbank).</p>
+            <p>Öffnen Sie anschließend die Oberfläche, die Ihnen Ihr Webspace-Anbieter zur
+                Verwaltung der Inhalte einer Datenbank zur Verfügung stellt (meist "phpMyAdmin").
+                Wechseln Sie in den Menüpunkt "Importieren" und laden Sie die Datei 
+                <span class="file">newsletter.sql</span> hoch, die Sie im Verzeichnis 
+                <span class="file">config</span> des Newslettersystems finden. Klicken
+                Sie auf "Ok": Werden Ihnen keine Fehlermeldungen angezeigt, so ist die
+                Einrichtung der DB abgeschlossen.</p>
+            <p>Das Open-Letters Newslettersystem ist dafür geeignet, zusammen mit anderen
+                Programmen eine gemeinsame Datenbank nutzen zu müssen. Ebenso ist es möglich,
+                mehrere Installationen der Newsletter-Software in eine zentrale Datenbank
+                zu legen. Sollte dies bei Ihnen der Fall sein, so lesen Sie bitte in den
+                <a href="FAQ.html">FAQ</a> die Lösung zum Einsatz von "Prefixes" nach.</p>
+
+            <a name="config"></a>
+            <h2>c) Einrichtung, zentrale Konfigurations-Datei:</h2>
+            <p>Bearbeiten Sie die Datei <span class="file">config.inc.php</span> im 
+                Verzeichnis <span class="file">config</span> mit 
+                einem Editor, z.B. dem Programm "Geany" von 
+                <a href="http://www.geany.org/Download/Releases" class="external">http://www.geany.org</a>
+                Bitte benutzen Sie dazu <strong>kein</strong> Text-Verarbeitungsprogramm
+                wie Microsoft Word oder das LibreOffice oder OpenOffice.org!</p>
+            <p>Gehen Sie diese Datei vollständig durch und ändern Sie die jeweils gut
+                dokumentierten Einstellungen nach Ihren Wünschen ab. Ersetzen Sie die 
+                config-Datei, die Sie in Schritt a) auf den Webspace geladen haben, durch
+                die von Ihnen angepasste Datei.</p>
+            
+            <a name="updates"></a>
+            <h2>d) Aktualisierung der Datenbank:</h2>
+            <p>Die im Abschnitt <a href="#datenbank">b) Datenbank aufsetzen und Inhalte 
+                importieren</a> eingespielte SQL-Datei wird nicht für jede Version des
+                Open-Letters Newslettersystems ganz neu erstellt. Es kann daher vorkommen,
+                dass der aktuelle Stand Ihrer Datenbank nicht dem aktuellsten Stand
+                des NewsletterSystems entspricht. Dies können Sie sehr einfach prüfen
+                und auf den neusten Stand aktualisieren lassen:</p>
+            <p>Öffnen Sie den Webbrowser und starten Sie damit die im Verzeichnis
+                <span class="file">admin</span> befindliche Datei 
+                <span class="file">update.php</span>. Die
+                von Ihnen ausgeführte Internetadresse könnte in etwa so aussehen:
+                <span class="url">http://www.example.com/newsletter/admin/update.php</span></p>
+            <p>Das NewsletterSystem wird nun automatisch feststellen, welche Aktualisierungen
+                an der Struktur der Datenbank fehlen und wird diese einspielen. Sie erhalten
+                nach sehr kurzer Zeit einen Bericht über den Verlauf des Updates.</p>
+            <p>Hinweis 1: Es ist kein Problem, diese Updates "zu oft" auszuführen. Das
+                UpdateSystem kann damit umgehen, dass Sie den "F5"-Knopf im Browser
+                verwenden (neuladen der Seite) oder die <span class="file">update.php</span>
+                öfter starten.</p>
+            <p>Hinweis 2: Wir bieten für das Open-Letters Newslettersystem in unregelmäßigen
+                Abständen neue Versionen mit Fehlerbehebungen oder neuen Funktionen an. Es
+                wird empfohlen, diesen Schritt nach jedem Aktualisieren des Systems
+                vorzunehmen. Der gesamte Update-Prozess wird in einer gesonderten Doku
+                beschrieben.</p>
+
+            <a name="emailversand"></a>
+            <h2>e) Testing E-Mail-Versand:</h2>
+            <p>Ein häufig auftretendes Problem ist die richtige Eingabe (und das Testen)
+                der Zugangsdaten zum SMTP-Server (E-Mail-Versand-Server). Zur Prüfung der
+                Richtigkeit der in config/config.inc.php angegebenen SMTP-Daten finden Sie
+                im Verzeichnis <span class="file">extras</span> das Hilfs-Programm 
+                <span class="file">phpMailerSmtpTest.php</span>. Es bietet
+                Ihnen eine Möglichkeit, die hinterlegten SMTP-Daten zu testen und eine 
+                Test-Mail versenden zu lassen.</p>
+            <p>Rufen Sie dieses Programm mit Ihrem Webbrowser auf: Haben Sie das Newslettersystem
+                in Schritt a) auf Ihren Webspace mit der Internetadresse
+                <span class="url">http://www.example.com/</span> in das Unterverzeichnis 
+                <span class="file">newsletter</span> geladen, so erreichen Sie das 
+                Hilfsprogramm nun über diese Adresse:
+                <span class="url">http://www.example.com/newsletter/extras/phpMailerSmtpTest.php
+                </span> Das Programm wird nach dem Aufruf im Browser beginnen, sich mit dem
+                angegebenen SMTP-Server zu verbinden und dabei alle üblichen SMTP-Ports und
+                Verschlüsselungen auszuprobieren. Wird dabei erfolgreich eine SMTP-Verbindung 
+                aufgebaut, so wird eine Test-E-Mail an die E-Mail-Adresse verschickt, die in
+                der Datei <span class="file">config/config.inc.php</span> als SENDER_ADDRESS
+                hinterlegt ist. Über alle Tests und Erfolge/Fehler wird Ihnen in Ihrem 
+                Browser Bericht erstattet.</p>
+
+            <a name="htaccess"></a>
+            <h2>f) Absicherung der Admin-Oberfläche:</h2>
+            <p>Richten Sie danach den Htaccess-Schutz für das Admin-Verzeichnis ein. Dazu 
+                müssen Sie die beiden Dateien <span class="file">.htaccess</span> und
+                <span class="file">.htpasswd</span> im Verzeichnis
+                <span class="file">admin</span> anpassen:</p>
+            <p>Zuerst sollten Sie den Pfad der Datei <span class="file">./admin/.htpasswd</span>
+                ändern, der in der Datei <span class="file">./admin/.htaccess</span> angegeben
+                ist. Danach können Sie diese Datei wieder schließen. Darüber hinaus 
+                müssen Sie eigene Benutzerdaten (Benutzername und verschlüsseltes Passwort)
+                erzeugen und in die Datei <span class="file">./admin/.htpasswd</span> eintragen.</p>
+            <p>Zur Vereinfachung haben wir Ihnen ein PHP-Programm geschrieben, welches die
+                dafür notwendigen Einträge für Sie erzeugt: Rufen Sie die Datei 
+                <span class="file">htaccess_help.php</span>
+                im Verzeichnis <span class="file">extras</span> mit Ihrem Browser auf.
+                Haben Sie das Newslettersystem in Schritt a) auf Ihren Webspace mit der Internetadresse
+                <span class="url">http://www.example.com/</span> in das Unterverzeichnis
+                <span class="file">newsletter</span> geladen, so erreichen Sie das Hilfsprogramm nun über 
+                <span class="url">http://www.example.com/newsletter/extras/htaccess_help.php</span>
+                Dieses Programm generiert automatisch den Inhalt der Datei .htaccess, Sie
+                müssen diese Daten nur noch kopieren, in die Datei einfügen und die Datei
+                neu auf den Webserver hochladen. Zur Erzeugung der verschlüsselten Zugangsdaten
+                bietet das Skript Ihnen ein Formular zur Eingabe von Benutzername und Passwort
+                an => die erzeugten Daten fügen Sie bitte in die Datei .htpasswd ein und
+                laden auch diese neu auf den Webspace.</p>
+            <p><strong>Wichtig:</strong> Aus Gründen der Sicherheit Ihres Systems empfehlen wir,
+                dass Sie auch das Verzeichnis <span class="file">config</span> mit einem
+                solchen Schutz versehen: Die in der Datei <span class="file">open-letters.log</span>
+                abgelegten Verlaufs-Informationen sollten gegen den Aufruf aus einem
+                Webbrowser heraus geschützt werden.</p>
+            <p>Eine Anleitung zur Verzeichnis-Sicherung mit htaccess finden Sie im Buch 
+                SelfHtml unter<a href="http://de.selfhtml.org/servercgi/server/htaccess.htm#verzeichnisschutz"
+                class="external">http://de.selfhtml.org/servercgi/server/htaccess.htm#verzeichnisschutz</a>
+                dort heißt die Datei ".htpasswd" dann ".htusers".</p>
+
+            <a name="hilfe"></a>
+            <h2>Weitere Hilfe, Problemlösung, Anleitungen:</h2>
+            <p>An dieser Stelle sei auf die <a href="FAQ.html">FAQ-Hilfedatei</a> verwiesen,
+                die Sie ebenfalls im Verzeichnis <span class="file">documentation</span> finden.
+                Darin sind einige Themen
+                diskutiert, die Ihnen ggf. bei der Einrichtung und beim ersten Testen der
+                Software auffallen. Im benannten Dokument finden Sie zum Beispiel Hilfe zur
+                Einrichtung mehrerer paralleler Installationen der Newsletter-Software 
+                ("Datenbank-Prefixes") oder evtl. im Browser angezeigte Fehlermeldungen zu
+                Datums- und Uhrzeitfunktionen.</p>
+        </div>
+    </body>
+</html>

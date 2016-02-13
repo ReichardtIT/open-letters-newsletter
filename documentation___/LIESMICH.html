@@ -1,0 +1,204 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="style/open-letters-doc.css" type="text/css" />
+    </head>
+    <body>
+        <div id="content">
+            <h1>Willkommen im Open-Letters Newslettersystem</h1>
+            <span class="changes">letzte Änderung: 2014-12-30, Stefan Rank-Kunitz</span>
+            <h2>Inhalt:</h2>
+            <ol>
+                <li><a href="#lizenz">Lizenz</a></li>
+                <li><a href="#autoren">Autoren / Kontakt</a></li>
+                <li><a href="#zielstellung">Zielstellung dieses Newslettersystems</a></li>
+                <li><a href="#voraussetzungen">Technische Voraussetzungen</a></li>
+                <li><a href="#funktionsuebersicht">Funktionsübersicht</a></li>
+                <li><a href="#installation">Installation, Einrichtung und Aktualisierung</a></li>
+                <li><a href="#dokumentation">Weitere Dokumentation</a></li>
+            </ol>
+
+
+            <a name="lizenz"></a>
+            <h2>1. Lizenz</h2>
+            <p>Diese Software wird nach den Vorgaben der GNU Lesser General Public License
+                (Version 3 oder neuer) veröffentlicht. Die originalen Lizenzbestimmungen können
+                unter <a class="external" href="http://www.gnu.org/licenses/lgpl.html">
+                http://www.gnu.org/licenses/lgpl.html</a> nachgelesen werden, eine inoffizielle
+                deutsche Übersetzung befindet sich unter 
+                <a href="http://www.gnu.de/documents/lgpl.de.html" class="external">
+                http://www.gnu.de/documents/lgpl.de.html</a></p>
+            <p>Darüber hinaus bitten die Autoren den Nutzer, das System in angemessenem
+                Rahmen zu nutzen und insbesondere die Rechte der Empfänger des Newsletters
+                zu wahren!</p>
+
+
+            <a name="autoren"></a>
+            <h2>2. Autoren/Kontakt</h2>
+            <p>Das Open-Letters Newslettersystem wird entwickelt von Open-Letters 
+                Webentwicklung, Stefan Rank-Kunitz, Leipzig/Germany nach einer Vorlage 
+                der QuBIT KG, Sebastian de Vries, Leipzig/Germany.</p>
+            <p>Kontakt: info@open-letters.de<br>
+                Web: <a href="http://www.open-letters.de">http://www.open-letters.de</a></p>
+
+
+            <a name="zielstellung"></a>
+            <h2>3. Zielstellung des Systems</h2>
+            <p>Die Zielstellung bei der Entwicklung dieser Software ist die Erschaffung
+                eines webbasierten und einfach zu bedienenden Newslettersystems, welches
+                es Personen ohne HTML/CSS-Kenntnisse ermöglicht, Newsletter-E-Mails zu
+                erstellen und an einen selbst festzulegenden Empfängerkreis zu versenden.
+                Selbstverständlich muss es einem Interessenten bzw. Empfänger möglich sein,
+                sich zum Newsletter an- bzw. abzumelden. Die Software muss den Betreiber
+                technisch möglichst weitgehend unterstützen und (im Vergleich zu anderen
+                Programmen dieser Art) besonders wenig technisches Wissen beim Anwender
+                voraussetzen.</p>
+            <p>Darüber hinaus sollen die technischen Voraussetzungen des Newslettersystems so
+                gering wie möglich gehalten werden, um das System auch auf günstigem oder gar
+                kostenfreiem Webspace betreiben zu können. Insbesondere ist dabei der Versand
+                des Newsletters ohne Einrichtung eines Cron-Jobs vorauszusetzen.</p>
+
+
+            <a name="voraussetzungen"></a>
+            <h2>4. Technische Voraussetzungen</h2>
+            <p>Das System benötigt aktuell:</p>
+            <ul>
+                <li>PHP5-Webspace ab 5.2.0, Modul "PDO" zur Datenbank-Anbindung notwendig 
+                    <br>(ist ab PHP 5.1 Basis-Bestandteil von PHP)</li>
+                <li>eine MySQL-Datenbank (kann mit anderen Programmen geteilt werden)</li>
+            </ul>
+            <p>Darüber hinaus muss der Browser des Administrators zum Versand des
+                Newsletters JavaScript aktiviert haben.</p>
+
+
+            <a name="funktionsuebersicht"></a>
+            <h2>5. Funktionsübersicht</h2>
+            <h3>a) An-/Abmeldung durch den Empfänger:</h3>
+            <p>Der Kunde kann sich über eine öffentliche Oberfläche zum Newsletter an- 
+                und abmelden ("Frontend"). In jedem Newsletter ist darüber hinaus ein 
+                Link enthalten, mit dem der Empfänger sich vom Newsletter-Empfang 
+                abmelden kann.</p>
+            <p>Der Prozess der Registrierung erfolgt über ein "Double-OptIn", d.h. nach
+                der Anmeldung im Frontend (öffentliches Anmeldeformular) oder im Backend
+                (Admin-Oberfläche) wird an die neu eingetragene E-Mail-Adresse eine E-Mail
+                mit einem Bestätigungslink versendet. Erst nachdem der Empfänger diesen
+                Link geklickt hat, ist seine E-Mail-Adresse für den Empfang von Newslettern
+                freigeschaltet.</p>
+            <p>Die Abmeldung erfolgt über einen Link, der in jedem verschickten Newsletter
+                enthalten ist, oder über den Link am Fuß der Registierungsseite. Das Abmelden
+                "deaktivert" die E-Mail-Adresse des Empfängers nur und löscht sie nicht aus
+                dem Newslettersystem heraus (Die vollständige Löschung ist dem Administrator
+                über die Admin-Oberfläche möglich) => auf diese Weise wir ein versehentlicher
+                Neu-Import der abgemeldeten E-Mail-Adresse verhindert.</p>
+
+            <h3>b) Newsletter empfangen:</h3>
+            <p>Alle Newsletter werden in HTML- und Text-Form versendet. Das E-Mail-Programm
+                des Empfängers entscheidet, welcher der Inhalte angezeigt wird. Zum Versand
+                der E-Mails wird die Open-Source-Bibliothek "PhpMailer" von
+                <a class="external" href="https://github.com/Synchro/PHPMailer">
+                    https://github.com/Synchro/PHPMailer</a> verwendet.</p>
+            <p>Über einen Link im Newsletter oder einen Link in der zuvor benannten öffentlichen
+                Oberfläche kann der bereits versendete Newsletter online im Webbrowser betrachtet
+                werden.</p>
+
+            <h3>c) Zugang zur Admin-Oberfläche:</h3>
+            <p>Die Administrations-Oberfläche ist durch Aufruf der zuvor benannten öffentlichen
+                Oberfläche und Anhängen von "/admin" an die Internetadresse erreichbar. Haben
+                Sie das Newslettersystem beispielsweise unter
+                <span class="url">http://newsletter.example.com</span>
+                installiert, so erreichen Sie die Administrations-Oberfläche unter
+                <span class="url">http://newsletter.example.com/admin</span></p>
+            <p><strong>ACHTUNG:</strong> Die Administrations-Oberfläche ist derzeit UNGESICHERT und muss während
+                der Installation durch einen Htaccess-Schutz gesichert werden (siehe Anleitung 
+                und Hilfsprogramm dazu in der <a href="#installation">Installation</a>). Eine 
+                Benutzerverwaltung und ein Rechte-Management ist derzeit noch nicht enthalten
+                (siehe Datei ToDo.txt).</p>
+
+            <h3>d) An-/Abmeldung von Empfängern durch den Administrator:</h3>
+            <p>Innerhalb der Admin-Oberfläche hat der Administrator die Möglichkeiten:</p>
+            <ul>
+                <li>die Liste der Empfänger einzusehen</li>
+                <li>die Liste nach bestimmten Namen oder E-Mailadressen zu filtern</li>
+                <li>Empfänger hinzuzufügen</li>
+                <li>Empfänger zu löschen</li>
+            </ul>
+
+            <h3>e) Verwaltung der Newsletter:</h3>
+            <p>Der Administrator kann in der Admin-Oberfläche eine Liste aller vorhandenen 
+                Newsletter einsehen. Dabei ist bei jedem Newsletter einsehbar, ob er 
+                bereits versendet wurde. Der Newsletter kann angesehen, versendet, gelöscht
+                und bearbeitet werden.</p>
+            <p>Darüber hinaus kann ein neuer Newsletter angelegt werden. Dabei ist eines 
+                der vorhandenen Newsletter-Templates auszuwählen. Newsletter-Templates sind 
+                Layoutvorlagen aus HTML und CSS, welche das äußere Erscheinungsbild eines
+                Newsletters nahezu vollständig bestimmen. Das Füllen eines Newsletters mit 
+                Inhalten geschieht durch das Erzeugen neuer "Einträge" des Newsletters und 
+                Bearbeiten dieser Einträge.</p>
+            <p>Die Bearbeitung eines Newsletter-Eintrages geschieht mit Hilfe des Editors
+                "TinyMCE", der die bequeme Formulierung und Formatierung des Eintrags-Textes
+                ohne Kenntnisse in HTML und CSS ermöglicht. Durch Einsatz des "Ajax Filemanagers"
+                können in einen Newsletter-Eintrag auf einfache Weise Bilder hochgeladen und
+                eingebunden werden.</p>
+
+            <h3>f) Newsletter-Versand:</h3>
+            <p>Der Versand eines Newsletters muss immer so geschehen, dass die versendeten 
+                Newsletter beim Empfänger (dessen Mailprogramm / Mailserver) nicht oder nur
+                gering unter Spam-Verdacht fallen. Eine wichtige Bedingung dafür ist der Versand
+                der Newsletter über einen SMTP-Server. Die Zugangsdaten zu Ihrem SMTP-Server 
+                stellen Sie während der Installation einmalig in der zentralen Config-Datei
+                ein (siehe Abschnitt <a href="#installation">Installation</a>).</p>
+            <p>Eine weitere Bedingung für eine geringe Spam-Einstufung ist der Versand der 
+                Newsletter-E-Mails in kleinen Gruppen zu wenigen Einzel-Mails. Häufig verwenden
+                Newslettersysteme dafür einen "Cron-Job", also einen System-Wartungs-Aufruf
+                des Webservers, zu dessen Einrichtung man häufig administrativen Zugriff auf
+                den Webserver und entsprechende Kenntnisse benötigt. Mit Hilfe dieses Cron-Dienstes
+                werden die E-Mails über einen längeren Zeitraum einzeln oder in kleinen Gruppen 
+                versendet.</p>
+            <p>Das Open-Letters Newslettersystem verlagert die Steuerung des Versands in
+                eine Ajax-Oberfläche im Browser des Administrators aus. Diese Oberfläche
+                zeigt für den Administrator/Versender einen Fortschrittsbalken an und stößt
+                auf dem Webserver in Abständen zu wenigen Sekunden den Versand weiterer 
+                Newsletter-Mails an. Damit ist das oben beschriebene "Cron-System" hier
+                nicht notwendig.
+                Hinweis: Aus diesem Grund führt das Schließen der Website durch den Administrator
+                vor Ende des Versandprozesses zum Abbruch des Versendens. Es ist notwendig, das
+                Browserfenster so lang offen zu lassen, bis der Fortschrittsbalken die 100%-Marke
+                erreicht hat.</p>
+
+
+            <a name="installation"></a>
+            <h2>6. Installation, Einrichtung und Aktualisierung</h2>
+
+            <p>Eine detaillierte Installationsanleitung finden Sie in der Datei 
+                <a href="INSTALLATION.html">INSTALLATION.html</a>. Darin sind vom Download bis zum 
+                Abschluss der Einrichtung alle Schritte genau beschrieben. Falls Sie bereits eine
+                Installation des Open-Letters Newslettersystems installieren haben und diese
+                Installation jetzt aktualisieren möchten, so lesen Sie bitte die
+                <a href="UPDATES.html">UPDATES.html</a>.</p>
+
+
+            <a name="dokumentation"></a>
+            <h2>7. Weitere Dokumentation</h2>
+            <p>Eine umfangreiche Liste an Fragen und Antworten haben wir in der Datei
+                <a class="external" href="FAQ.html">FAQ.html</a> zusammengetragen. Bitte lesen Sie die Datei einmal ganz durch, Sie
+            werden viele wertvolle Tipps zu Themen wie Spam-Einstufung der Newsletter-E-Mails,
+            Gestaltungs-Hinweise und zur Konfiguration der Newsletter-Software bekommen.</p>
+            <p>Wenn Sie weitere Fragen haben, nehmen Sie bitte gern Kontakt mit uns auf!</p>
+
+            <h3>Entwicklung</h3>
+            <p>Das gesamte Newslettersystem ist in objektorientiertem PHP5 programmiert.
+                Alle Klassen und Methoden sind PhpDoc-Dokumentiert. Sie können also einfach
+                den PhpDocumentor über das System laufen lassen, um eine detaillierte 
+                Dokumentation der API zu erhalten.</p>
+
+            <h3>Optische Anpassung</h3>
+            <p>Zu Erstellung von Templates für das Front- und Backend der Website ist im Verzeichnis
+                "website_templates" eine Datei README.txt enthalten.</p>
+            <p>Zu Erstellung von Newsletter-Templates ist im Verzeichnis "newsletter_templates" eine
+                Datei README.txt enthalten.</p>
+            <p>Darüber hinaus liefert dieses Newslettersystem für Front-, Backend und Newsletter mehrere
+                Templates mit, die als Veranschaulichung und Basis für eigene Templates gut geeignet
+                sind.</p>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,81 @@
+/**
+    Document   : template_01
+    Created on : 15.11.2009, 21:52:31
+    @Author     : Stefan Rank-Kunitz @ Open-Letters.de
+*/
+
+	body { color:#333; background-color:#eee; padding:0px; margin:0px;
+			font-family:Tahoma,Helvetica,Verdana,Arial,sans-serif; }
+
+	img {border: 0px; padding: 0px; margin: 0px;}
+	h1 { color: #FF8614; font-family:Verdana; font-size:18px; font-weight: bold;
+		text-align: center; padding: 5px; margin: 5px;}
+	h2 { color: #fff; font-family:Verdana; font-size:12px; font-weight: bold;
+		text-decoration:none; margin: 3px 0px; padding: 3px; background-color: #4C6E9E;}
+	a { color: #FF8614; text-decoration: underline;}
+	a:hover { color:#D16500; text-decoration: underline;}
+	td{ font-size: 12px; color: #666;}
+
+	hr { border-style: solid; border-color: #ccc; border-width: 1px 0px 0px 0px; margin: 0px;}
+	hr.separator { border-color: #ccc; }
+
+	fieldset{ border: 1px solid #999; background-color: #eee; margin-top: 10px;}
+	legend{ color: #999; padding: 3px;}
+
+	#container {margin: 15px auto; width: 950px;}
+	#mastertable{ margin: 0px; width: 100%;}
+	#mastertable td{ padding: 0px;}
+	#forwardlink {text-align: right;}
+	#header{ height: 149px;}
+
+	#contenttable{ border: 1px solid #ccc; background-color: #fff; font-size: 14px; color: #333;
+		margin: 0px; width: 100%;}
+	#contenttable td { padding: 0px;}
+	#content { padding: 15px; padding-bottom: 30px;}
+	#content td{ padding: 3px;}
+
+	#copyright {text-align: right;}
+
+    tr.deleted td{
+        color: #999;
+        background-color: #eee;
+    }
+    
+    #newsletter_admin_backend_filterform label{
+        display: block;
+    }
+    
+    ul.admin_main_menu{
+        margin: 0 0 20px 0;
+        padding: 0;
+        border-bottom: 1px solid #ccc;
+    }
+    ul.admin_main_menu li{
+        list-style-type: none;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 5px 5px 0 0;
+        margin: 0 0 -1px 5px;
+        background-color: #f6f6f6;
+    }
+    
+    ul.admin_main_menu li a{
+        padding: 10px;
+        display: block;
+        color: #aaa;
+        text-decoration: none;
+    }
+
+    ul.admin_main_menu li a:hover{
+        color: #FF8614;
+        text-decoration: underline;
+    }
+
+    ul.admin_main_menu li.active_menu_entry{
+        background-color: #fff;
+        border-bottom: 1px solid #fff;
+    }
+
+    ul.admin_main_menu li.active_menu_entry a{
+        color: #FF8614;
+    }

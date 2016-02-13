@@ -1,0 +1,100 @@
+
+/******************************************
+ * einige allgemeine Elemente des Systems *
+ ******************************************/
+	body{ font-size:12px; background-color: #ccc; padding:0px 50px;}
+	#container{ max-width: 1280px; margin: 30px auto; border: 1px solid #fff; padding:10px;
+			background-color: #eee;}
+	h1{text-decoration: underline; margin: 15px 50px;}
+
+	/* Das allgemeine Format einer Ueberschrift, z.B. die Ueberschrift "Impressum"
+	 * der Seite "Impressum". */
+	div.headline{ color: #666; font-size:14px; text-decoration: underline; padding: 4px;
+        margin: 10px 0px;}
+	div.headline strong{ font-weight: normal; font-variant: small-caps; color: #999;}
+
+    /* Die allgemeine Formatierung eines farbigen Kastens, z.B. um Login-Fenster auf
+	 * der Seite "Login". */
+	fieldset.kasten { background-color:#fff; padding:15px; border: 1px solid #666; margin:15px 0px; }
+	legend.boxtitle{ color: #fff; border: 1px solid #666; background-color: #FF8400;
+		padding: 4px 10px; font-weight:bold;}
+
+	#bottom_box_success{ padding: 10px; background: #9e9; margin:10px 50px;}
+	#bottom_box_success div.success{color:#060; font-weight: bold; font-size: 14px;}
+
+	#bottom_box_error{ padding: 10px; background: #ff6; margin:10px 50px;border:1px solid #f30;}
+	#bottom_box_error div.warnung{color:#f30; font-weight: bold; font-size: 14px; border:0px;}
+
+	ul{
+		
+	}
+
+/*********************************************
+ * Meldungen und Fehlermeldungen des Systems *
+ *********************************************/
+
+	/* Dies bestimmt die Ansicht von Warnhinweisen und Fehlermeldungen, z.B. die
+	 * Meldung fuer den Kunden, dass eine soeben angeklickte Warengruppe keine
+	 * Produkte enthaelt. */
+	div.error { color: #FF3300; padding: 5px 5px 5px 30px; text-align:left;
+		margin: 0px;}
+	div.error h2{ text-decoration: none; color: #C00; font-weight:normal; padding:0px;
+		margin: 0 0 10px 0;}
+
+	/* Dies bestimmt die Ansicht von Erfolgsmeldungen an den User, z.B. die Meldung
+	 * eines erfolgreichen Logins oder des Einfuegens eines Produktes in den Warenkorb. */
+	div.success { color:#0a0; padding: 5px 5px 5px 30px;
+		text-align:left; margin: 0;}
+	div.success h2{ text-decoration: none; color: #060; font-weight:normal; padding:0px;
+		margin: 0 0 10px 0;}
+
+
+/********************************************************************
+ * Listpage: Das Aussehen verschiedener Elemente im Bezug einer auf *
+ * mehrere Seiten verteilten Liste (z.B. eine Warengruppe).			*
+ ********************************************************************/
+
+	/* Der Kasten um die Seitenauswahlfunktion am Fuss einer auf mehrere Seiten
+	 * umgebrochenen Liste, z.B. die verlinkten Seitenzahlen am Fuss der Liste
+	 * der in einer Warengruppe enthaltenen Produkte. */
+	div.page-selector{ text-align: center;}
+
+
+/*******************************************************************
+ * Nur fuer den Admin sichtbar:									   *
+ * Aussehen von Admin-Buttons an verschiedenen Stellen des Systems *
+ *******************************************************************/
+
+	.nice_button{ margin: -2px; padding: 3px; font-size: 10px; width: 170px; height: 55px;
+			margin-top:5px; margin-bottom: 2px; vertical-align:middle; margin-right: 5px;}
+	.nice_button img{ vertical-align: middle; float:left;}
+
+
+/************************************************************************
+ * Nur fuer den Admin sichtbar:											*
+ * Ansicht des Admin-Optionen-Fensters auf verschiedenen Seiten (z.B.	*
+ * im Impressum zur Eingabe der Adressdaten des Shopbetreibers)			*
+ ************************************************************************/
+
+	/* Ansicht des gesamten Optionen-Fensters */
+	div.optionen_bearbeitungsfenster{ background-color:#96FF96; padding: 9px; text-align:left;
+		border: 1px groove #e36e05; margin:15px; margin-left:0px; margin-right:0px;}
+
+	/* Ansicht einer einzelnen Option im Optionenfenster */
+	div.option{ background-color: #fff0cf; padding: 9px;
+		border: 1px solid #e36e05; margin: 0px; margin-top: 6px; margin-bottom: 6px;}
+
+	/* Ansicht eines Text-Eingabefeldes in einer Option */
+	input.text_option { margin: 3px; margin-left: 9px; padding: 3px;}
+
+
+/**********************************************************************
+ * Nur fuer den Admin sichtbar:                                       *
+ * Ansicht der Benutzerverwaltung zur Vergabe von Rechten und Aendern *
+ * der Benutzerdaten wie E-Mail-Adresse, Name, sowie Moeglichkeit zum *
+ * Zuruecksetzen des Passwortes                                       *
+ **********************************************************************/
+
+    /* Liste aller Benutzer des Systems: Zeilen abwechselnd einfaerben */
+	.userlisten_eintrag_ungerade { background-color: #F0E7D5; padding:0px; padding-left:0px; margin: 0px;}
+	.userlisten_eintrag_gerade { background-color: white; padding:0px; padding-left:0px; margin: 0px;}

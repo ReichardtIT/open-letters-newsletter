@@ -1,0 +1,18 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+.navbar-default {
+  background-color: rgba(0, 0, 0, 0);
+  border-color: #e7e7e7;
+}
+.jumbotron {
+  background-color: #ffffff;
+  border: 1px solid #e3e3e3;
+  color: inherit;
+  margin-bottom: 30px;
+}

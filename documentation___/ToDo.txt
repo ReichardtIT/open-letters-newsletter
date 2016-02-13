@@ -1,0 +1,29 @@
+Diese Datei enthält eine Liste von Vorschlägen für Erweiterungen der Software:
+*******************************************************************************
+
+Administrations-Oberfläche:
+    * Der Htaccess-Schutz der Admin-Oberfläche ist durch ein echtes Login-System zu
+      ersetzen. Die Ablage der Zugangsdaten sollte in der Datenbank und verschlüsselt
+      (gesalzen) geschehen.
+    * Aufbauend auf ein echtes Login-System sollte es eine Oberfläche zur Bearbeitung
+      der Administrator-Konten geben.
+    * Die Admin-Oberfläche sollte so umgebaut werden, dass sie über eine ganz andere URL
+      verfügbar gemacht werden kann. Besonders die Ajax-Requests im Versandprozess
+      erlauben dies gegenwärtig nicht.
+
+Newsletter:
+    * Das Newslettersystem soll so erweitert werden, dass es nicht mehr nur eine,
+      sondern beliebig viele Listen von Newsletter-Empfängern geben kann. Dies wird
+      dazu genutzt werden, einen Newsletter an einen ausgewählten Empfängerkreis
+      zuzustellen.
+      Es ist zuvor die Frage zu klären, wie der Kunde sich im öffentlichen Frontend
+      zu nur einem der Newsletter-Listen anmelden kann.
+    * Es sollte eine größere Anzahl fertiger Newsletter-Templates geben, die mit dem
+      System ausgeliefert werden.
+    * Der Titel des Newsletters (E-Mail-Subject) steht aktuell fest in der Datei
+      config/config.inc.php. Dieses soll beim Anlegen eines neuen Newsletter abgefragt
+      und in der DB gespeichert werden.
+    * Liesmich.txt überarbeiten: Upgrade einer bestehenden Installation beschreiben
+
+Bugs und Aktualisierungen:
+    * Das TinyMCE im Admin-Bereich muss aktualisiert werden.

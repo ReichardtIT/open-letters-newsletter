@@ -1,0 +1,187 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="style/open-letters-doc.css" type="text/css" />
+    </head>
+    <body>
+        <div id="content">
+            <h1>Open-Letters Newsletter-System FAQ</h1>
+            <span class="changes">letzte Änderung: 2014-12-30, Stefan Rank-Kunitz</span>
+
+            <h2>Übersicht:</h2>
+            <ul>
+                <li><a href="#webhosting">Abschnitt 1: Webhosting, Datenbank, PHP</a></li>
+                <li><a href="#emailversand">Abschnitt 2: E-Mail-Versand</a></li>
+                <li><a href="#gestaltung">Abschnitt 3: Newsletter-Gestaltung</a></li>
+            </ul>
+            
+            <a name="webhosting"></a>
+            <h2>Abschnitt 1: Webhosting, Datenbank, PHP</h2>
+
+            <h3>Fehlermeldungen im Browser, Datum & Uhrzeit</h3>
+            <p><strong>Frage:</strong> Ich sehe Fehlermeldungen dieser Art in meinem Browser, was kann ich 
+                dagegen tun?
+                <em>Warning: date() [function.date]: It is not safe to rely on the system's
+                    timezone settings. You are required to use the date.timezone setting or
+                    the date_default_timezone_set() function. In case you used any of those
+                    methods and you are still getting this warning, you most likely misspelled
+                    the timezone identifier. </em></p>
+            <p><strong>Antwort:</strong> Ihr Webserver beschwert sich mit dieser Meldung darüber, dass in der
+                Newsletter-Software Datums- und Zeitfunktionen verwendet werden, Ihr Web-
+                Hoster jedoch die Einrichtung der Zeitzone versäumt hat. Bitte fügen Sie
+                in die Datei config/config.inc.php die folgende Zeile ein:
+                <span class="code">date_default_timezone_set("Europe/Berlin");</span>
+
+            <h3>Webhosting, Datenbanken, Datenbank-Prefixes</h3>
+            <p><strong>Frage:</strong> Leider bietet mir mein Webhoster nur EINE Datenbank an und/oder ich muss
+                weitere Datenbanken zu hohen monatlichen Kosten nachbestellen. Kann das
+                Newsletter-System auch, zusammen mit anderen Programmen, in EINE Datenbank
+                gelegt werden? Ist es möglich, mehrere Installationen des Newsletter-Systems
+                parallel in EINER Datenbank zu betreiben?</p>
+            <p><strong>Antwort:</strong> Das Open-Letters Newslettersystem ist dafür geeignet, zusammen mit anderen
+                Inhalten eine gemeinsame Datenbank nutzen zu müssen. Ebenso ist es möglich,
+                mehrere Installationen der Newsletter-Software in eine zentrale Datenbank 
+                zu legen.<br>
+                Dafür bietet das System an, die Namen der Datenbank-Tabellen mit zusätzlichen
+                Vorsilben ("prefixes") zu ergänzen. Nachdem Sie im Abschnitt 6b) der Installation
+                die Datenbank importiert haben, können Sie diese nun bei Bedarf umbenennen,
+                indem Sie jedem Namen einer Datenbank-Tabelle (bitte jeweils das selbe) 
+                Prefix voranstellen. Die aus der newsletter.sql importierten Datenbank-
+                Tabellen</p>
+            <ul>
+                <li><span class="file">newsletter</span>,</li>
+                <li><span class="file">newsletterCont</span> und</li>
+                <li><span class="file">newsletterEntries</span></li>
+                <li>(und alle weiteren)</li>
+            </ul>
+            <p>könnten danach so heißen:</p>
+            <ul>
+                <li><span class="file">01_newsletter</span>,</li>
+                <li><span class="file">01_newsletterCont</span> und</li>
+                <li><span class="file">01_newsletterEntries</span></li>
+                <li>...</li>
+            </ul>
+            <p>Die Umbenennung können Sie sehr leicht vornehmen, indem Sie das zum Import
+                der Datenbank-Tabellen verwendete Werkzeug "phpMyAdmin" öffnen und im Menü-
+                Punkt "Struktur" den jeweiligen Tabellen-Namen mit dem "Bearbeiten"-Stift
+                ändern.</p>
+            <p>Abschließend teilen Sie dem Newsletter-System bitte die neue Vorsilbe mit:
+                Bearbeiten Sie dazu die Datei config/config.inc.php und ändern Sie die
+                Option PREFIX (z.B. nach obigem Beispiel):</p>
+            <ul>
+                <li>vorher:   <span class="code">define("PREFIX","");</span></li>
+                <li>nachher:  <span class="code">define("PREFIX","01_");</span></li>
+            </ul>
+            <p>Bitte speichern Sie die Datei und laden Sie sie neu auf den Webspace.</p>
+
+            <a name="emailversand"></a>
+            <h2>Abschnitt 2: E-Mail-Versand</h2>
+
+            <h3>SMTP-Versand, Sendmail-Versand, E-Mail-Versand bei 1&amp;1</h3>
+            <p><strong>Frage:</strong> Ich bekomme leider immer beim Versand der Newsletter und/oder
+                der Anmelde-Bestätigungen eine Fehlermeldung, dass die E-Mail nicht verschickt werden
+                konnte. Gibt es eine Möglichkeit, wie ich bei der Einrichtung des E-Mail-Versand
+                unterstützt werden kann?<br>
+                Hat mein Webspace (zum Beispiel 1&amp;1) besondere Anforderungen an die Einrichtung
+                des E-Mail-Versands?</p>
+            <p><strong>Antwort:</strong> Üblicherweise sollten Newsletter-E-Mails per SMTP versendet
+                werden, d.h. die Newsletter-Software verbindet sich mit einem (zum Webhosting gehörenden
+                oder externen) E-Mail-Server und übergibt diesem jede einzelne Newsletter-
+                E-Mail zum Versand. Für diese Variante sollten Sie in der Datei 
+                <span class="file">config/config.inc.php</span> diese Einstellungen 
+                vornehmen:</p>
+            <ol style="list-style-type: lower-alpha;">
+                <li>Internetadresse des E-Mail-Servers:<br>
+                    <span class="code">define("SMTP_HOST", "mail.example.com");</span></li>
+                <li>Benutzername auf dem E-Mail-Server (häufig ganze oder Teile der E-Mail-Adresse):<br>
+                    <span class="code">define( "SMTP_USER", "newsletter@example.com");</span></li>
+                <li>zugehöriges Passwort:<br>
+                    <span class="code">define( "SMTP_PASSWORD", "123secret456");</span></li>
+                <li>Port auf dem der E-Mail-Server auf neue Mails wartet:<br>
+                    <span class="code">define( "SMTP_PORT", 25);</span></li>
+                <li>optionale Angabe der Verschlüsselungsmethode ("", "ssl" oder "tls"):<br>
+                    <span class="code">define( "SMTP_SECURITY", "");</span></li>
+            </ol>
+            <p>Bitte lesen Sie in der LIESMICH.html nach, wie Ihnen das Programm 
+                <span class="file">extras/phpMailerSmtpTest.php</span> dabei helfen kann,
+                nach Eingabe der Einstellungen
+                a) bis c) die richtigen Werte für d) und e) zu ermitteln und dabei gleich
+                die Funktion des E-Mail-Versandes zu testen.</p>
+            <p>Alternativ gibt es jedoch auch Webhoster, die bieten Ihnen für den E-Mail-
+                Versand ausschließlich einen "internen SMTP-Server" ohne Authentifizierung
+                an. In diesem Fall richten Sie die Optionen b) und c) bitte leer ein:</p>
+            <ul>
+                <li><span class="code">define( "SMTP_USER", "");</span></li>
+                <li><span class="code">define( "SMTP_PASSWORD", "");</span></li>
+            </ul>
+            <p>Das Newsletter-System wird dann die Option e) ignorieren und NUR Ihre
+                Einstellungen a) und d) verwenden.</p>
+            <p>Abschließend bieten einige Webhoster den Versand von E-Mails per SMTP gar
+                nicht an oder blockieren gar den Aufbau einer Verbindung zu einem externen
+                SMTP-Server. In diesen Fällen haben Sie die Möglichkeit, das Versenden der
+                E-Mails über "sendmail" zu versuchen. Der Webhoster 1&amp;1 bietet dieses gar
+                als einzige Möglichkeit an. Bitte setzen Sie dafür die Einstellung SMTP_HOST
+                auf einen leeren Wert:</p>
+            <ul><li><span class="code">define("SMTP_HOST", "");</span></li></ul>
+            <p>Das Newsletter-System wird dann all Ihre Angaben b) bis e) ignorieren und
+                nur den Versand über den lokalen Mail-Transfer-Agent (MTA) versuchen.
+                HINWEIS: Leider ist es nicht (zuverlässig) möglich, diese Versand-Art über
+                das Hilfs-Programm <span class="file">extras/phpMailerSmtpTest.php</span>
+                zu testen, Sie werden darauf
+                angewiesen sein, den Empfang der E-Mails manuell (z.B. über eine Test-
+                Registrierung) manuell zu prüfen.</p>
+
+            <a name="gestaltung"></a>
+            <h2>Abschnitt 3: Newsletter-Gestaltung</h2>
+
+            <h3>Gestaltung der Newsletter, Verwendung von MS FrontPage und Adobe Dreamweaver, Copy-Paste-Probleme</h3>
+            <p><strong>Frage:</strong> Für die Gestaltung meiner Newsletter verwende ich Programme außerhalb der 
+                Newsletter-Adminoberfläche. Meine Texte schreibe ich in Microsoft Word und die Gestaltung
+                des Newsletters erfolgt in Microsoft FrontPage oder Adobe Dreamweaver. Die Inhalte füge ich
+                dann per "Kopieren und Einfügen" (Copy & Paste) in das Bearbeitungsfenster und drücke dann auf
+                "Speichern". Leider sieht der Newsletter-Eintrag nach dem Speichern ganz anders aus, einige
+                Inhalte fehlen und/oder das Layout ist "zerwürfelt". Was kann ich tun?</p>
+            <p><strong>Antwort:</strong> Grundsätzlich empfehlen wir Ihnen, bei der Gestaltung der E-Mails darauf zu achten, 
+                dass die Newsletter in der Regel nicht in einem Browser (wie Mozilla Firefox oder Microsoft 
+                Internet Explorer) betrachtet werden, sondern Ihre Empfänger die Nachricht üblicherweise 
+                in einem E-Mail-Programm ansehen. Bereits mächtige Programme wie Microsoft Outlook oder 
+                Mozilla Thunderbird schränken dort die möglichen Gestaltungselemente stark ein. Besonders 
+                Webmail-Oberflächen (wie Gmx oder Gmail) geben den aufwendiger gestalteten Newslettern aber
+                den Rest und die Nachrichten sind kaum lesbar.<br/>
+                Wir empfehlen Ihnen daher, sich mit 
+                dem Thema HTML-Gestaltung für Newsletter zu beschäftigen und dort auch selbst zu testen, 
+                was dargestellt werden kann und was nicht. An den Newsletter-Templates, die wir der Software
+                bei der Auslieferung beigelegt haben, erkennen Sie zum Beispiel, dass wir Ihnen die Verwendung von
+                Tabellen-basierten Layouts mit wenigen CSS-Eigenschaften empfehlen und Layouts auf Basis
+                von CSS-Containern oder gar HTML5-Elementen abraten.</p>
+            <p>Ganz besonders sollten Sie aber davon Abstand nehmen, die Newsletter mit WYSIWYG-Editoren 
+                (wie Microsoft Frontpage oder Adobe Dreamweaver) zu gestalten. Das HTML, welches von diesen
+                Programmen erzeugt wird ist in der Regel sehr umfangreich und sehr "speziell" (z.B. durch 
+                eingebettetes JavaScript) und eignet sich nicht dafür, in einem E-Mail Programm dargestellt 
+                zu werden.</p>
+            <p>Ihrer Gestaltung sind jedoch noch weitere Grenzen gesetzt:<br/>
+                Einerseits ist die Bearbeitung von HTML über den Website-Editor des Newsletter-Systems 
+                natürlich begrenzt. Der "TinyMCE" erzeugt üblicherweise sehr gutes und besonders dem HTML-Standard
+                entsprechendes HTML, jedoch ist das Einfügen fremder Inhalte (zum Beispiel HTML aus Frontpage 
+                oder reiner Text aus Microsoft Word) nicht in jedem Fall fehlerfrei. Wir haben versucht, 
+                dies durch bestimmte "Plugins" und Konfigurationen zu optimieren, Sie werden aber feststellen,
+                dass es schon direkt nach dem Einfügen in das Bearbeitungsfenster (vor dem Speichern) 
+                Abweichungen im Layout geben wird.</p>
+            <p>Ferner haben wir in die Newsletter-Bearbeitung eine Funktion eingebaut, welche Ihr HTML sehr
+                streng unter die Lupe nimmt und beim Abspeichern eines Eintrages filtert. Der sogenannte
+                "HTML-Purifier" filtert das von Ihnen erstellte HTML durch und verwirft dabei alles, was
+                er nicht kennt oder erlaubt. Diese Funktion ist einerseits aus Sicherheitsgründen notwendig
+                (sogenanntes Cross-Site-Scripting XSS wird vermieden), andererseits erfolgen dabei Optimierungen,
+                ohne die der Newsletter in den E-Mail-Programmen Ihrer Empfänger ganz sicher nicht darstellbar
+                wäre.<br />
+                In diesem Zusammenhang sind für Sie die Einstellungen <span class="code">ALLOWED_HTML_TAGS</span>
+                und <span class="code">ALLOWED_HTML_ATTRIBUTES</span>
+                in der zentralen <span class="file">config/config.inc.php</span> ganz wichtig. Über diese 
+                Einstellung wird festgelegt, was der HTML-Purifier erlaubt und was nicht. Bitte prüfen Sie,
+                ob die beim Speichern eines Newsletter-Eintrags entfernten Elemente in diesen Einstellungen 
+                enthalten (und damit zur Verwendung "freigeschaltet") sind! Alle HTML-Tags und Attribute, die
+                in diesen Einstellungen nicht eingetragen wurden, werden beim Speichern aus dem HTML Ihres 
+                Newsletter-Eintrags entfernt.</p>
+        </div>
+    </body>
+</html>

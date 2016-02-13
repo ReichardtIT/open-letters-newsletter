@@ -1,0 +1,31 @@
+
+			#####title#####
+
+---------------------------------------------------------------------------
+Wenn diese Nachricht nicht korrekt angezeigt wird, so können Sie eine
+HTML-Version des Newsletters unter der Internetadresse
+
+	#####website_url#####/newsletter_view.php?id=#####newsletter_id#####
+
+erreichen.
+---------------------------------------------------------------------------
+		 Reichardt Informationstechnik - Newsletter vom #####date#####
+		*************************************************
+
+#####content#####
+
+---------------------------------------------------------------------------
+	(c) Copyright #####date_Y##### Reichardt-Informationstechnik.de
+	http://www.reichardt-informationstechnik.de/impressum
+
+	Hinweis:
+	Sie erhalten diesen Newsletter, da Sie ein registriertes Mitglied von
+	www.open-letters.de sind.
+	Falls Sie in Zukunft nich mehr an diesem Newsletter interessiert sind,
+	so können Sie den Newsletter duch Eingabe der Internetadresse
+
+	#####website_url#####/index.php?unsubscribe=#####receiver_email#####
+
+	in Ihren Browser abbestellen.
+
+

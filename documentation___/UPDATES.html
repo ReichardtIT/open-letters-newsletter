@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="style/open-letters-doc.css" type="text/css" />
+    </head>
+    <body>
+        <div id="content">
+            
+            <h1>Open-Letters Newslettersystem - Aktualisierungen/Updates</h1>
+            <span class="changes">letzte Änderung: 2014-12-30, Stefan Rank-Kunitz</span>
+            
+            <h2>Übersicht:</h2>
+            Das Einspielen von Aktualisierunge des Open-Letters Newslettersystems gliedert sich,
+            ähnlich der Installation, in diese Schritte:
+            <ul>
+                <li><a href="#backup">Sicherung der bestehenden Installation</a></li>
+                <li><a href="#upload">Upload der Dateien und Verzeichnisse (per FTP) Verzeichnis-Rechte setzen</a></li>
+                <li><a href="#migration">Datenbank aktualisieren</a></li>
+                <li><a href="#config">Konfiguration anpassen</a></li>
+            </ul>
+            
+            <a name="backup"></a>
+            <h2>a) Sicherung (Backup) des bestehenden Systems:</h2>
+            <p>Zu Beginn sichern Sie bitte die bestehende Installation des Newsletter-Systems
+            auf Ihrem PC: Laden Sie zuerst alle Dateien und Verzeichnisse mit Hilfe eines
+            FTP-Programmes von Ihrem Webspace herunter auf Ihren PC. Bitte stellen Sie dabei
+            sicher, dass auch die Dateien <span class="file">.htaccess</span> und
+            <span class="file">.htpasswd</span> aus dem Verzeichnis <span class="file">admin</span>
+            mit heruntergeladen wurden => manche FTP-Programme ignorieren mit einem
+            Punkt beginnenden Dateien.</p>
+            
+            <p>Darüber hinaus sichern Sie bitte die Datenbank (und damit alle im Newsletter-System
+            gespeicherten Daten) über die Datenbank-Verwaltung, die Ihnen Ihr Webhoster zur 
+            Verfügung stellt. Das häufig angebotene Werkzeug "phpMyAdmin" bietet über den Menüpunkt
+            "Exportieren" die Möglichkeit, die gesamte Datenbank in eine SQL-Datei zu speichern
+            und diese herunterzuladen.<br/>(Hinweis: Ebenso bietet der Menüpunkt "Importieren" die
+            Möglichkeit, die heruntergeladene SQL-Datei wieder hochzuladen und damit den
+            gesicherten Stand der Datenbank wiederherzustellen.)</p>
+            
+            <p>Bitte bewahren Sie die heruntergeladenen Daten an einem SICHEREN Ort auf: Die per
+            FTP heruntergeladenen Dateien und Verzeichnisse enthalten unter anderem Ihren Zugang
+            zur Admin-Oberfläche, in der gesicherten SQL-Datenbank sind die Namen und
+            E-Mail-Adressen aller bei Ihnen registrierten Newsletter-Empfänger enthalten.</p>
+
+            <a name="upload"></a>
+            <h2>b) Download, FTP-Upload, Rechte setzen:</h2>
+                <p>Laden Sie nun die neuste Version des Newslettersystem von unserer Website
+                <a class="external" href="http://www.open-letters.de">http://www.open-letters.de</a>
+                herunter. Entpacken Sie die Zip-Datei. Löschen Sie die folgenden Verzeichnisse von Ihrem
+                Webspace und laden Sie diese aus der entpackten Zip-Datei neu hoch.</p>
+
+                <ul>
+                    <li><span class="file">admin</span></li>
+                    <li><span class="file">external_scripts</span></li>
+                    <li><span class="file">framework</span></li>
+                    <li><span class="file">include</span></li>
+                    <li><span class="file">languages</span></li>
+                    <li><span class="file">index.php</span></li>
+                    <li><span class="file">newsletter_view.php</span></li>
+                </ul>
+                
+                <p>Hinweis: Das reine "Überspielen" der Dateien und Verzeichnisse führt häufig nicht
+                zum gewünschten Ergebnis. Bitte löschen Sie die aufgelisteten Dateien und
+                Verzeichnisse weg und laden Sie diese neu hoch.</p>
+
+                <p>Nach dem Hochladen des Verzeichnisses <span class="file">admin</span> stellen Sie bitte
+                den htaccess-Verzeichnis-Schutz wieder her. Laden Sie dazu die Dateien 
+                <span class="file">.htaccess</span> und <span class="file">.htpasswd</span>
+                aus Ihrem oben erzeugten Backup wieder in das Verzeichnis <span class="file">admin</span>.</p>
+
+            <p>Bitte prüfen Sie anschließend die Verzeichnisrechte, wie im Abschnitt a) der
+                <a href="INSTALLATION.html">INSTALLATION</a> beschrieben ist.</p>
+
+            <a name="migration"></a>
+            <h2>c) Datenbank-Update:</h2>
+            <p>Öffnen Sie Ihren Webbrowser und loggen Sie sich in die Admin-Oberfläche
+            des Newsletter-Systems ein. Rufen Sie dann die Datei 
+            <span class="file">update.php</span>, welche ebenfalls im Verzeichnis
+            <span class="file">admin</span> liegt: Haben Sie das Newslettersystem unter
+            der Internetadresse <span class="url">http://www.example.com/</span> installiert,
+            so starten Sie das Updateprogramm update.php, indem Sie die Internetadresse
+            <span class="url">http://www.example.com/admin/update.php</span> mit Ihrem
+            Browser öffnen.</p>
+            
+            <a name="config"></a>
+            <h2>d) Anpassung der Konfiguration:</h2>
+            <p>Seit Ihrer Erst-Installation des Open-Letters Newsletter-Systems kann
+                es sein, dass in Folge funktionaler
+                Erweiterungen oder Problembehebungen Änderungen an der Konfiguration
+                erforderlich geworden sind.<br/>
+                Wir empfehlen Ihnen, dass Sie die auf Ihrem Webserver verwendete 
+                Datei <span class="file">config/config.inc.php</span> mit der nun
+                neu heruntergeladenen Version vergleichen. Bitte prüfen Sie, ob
+                neue Konfigurationen hinzu gekommen sind, andere entfallen oder
+                sich die Verwendung von Einstellungen verändert hat.</p>
+            <p>Bearbeiten Sie die Datei <span class="file">config.inc.php</span> im 
+                Verzeichnis <span class="file">config</span> mit 
+                einem Editor, z.B. dem Programm "Geany" von 
+                <a href="http://www.geany.org/Download/Releases" class="external">http://www.geany.org</a>
+                Bitte benutzen Sie dazu <strong>kein</strong> Text-Verarbeitungsprogramm
+                wie Microsoft Word oder das LibreOffice oder OpenOffice.org! Laden Sie die
+                Konfigurations-Datei nach eventuellen Änderungen neu mit einem FTP-Programm
+                auf den Webserver hoch.</p>
+        </div>
+    </body>
+</html>

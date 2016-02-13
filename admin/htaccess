@@ -1,0 +1,4 @@
+AuthName "Adminoberflaeche des Newslettersystems"
+AuthType Basic
+AuthUserFile /var/www/phpinfo/.htpasswd
+require valid-user
