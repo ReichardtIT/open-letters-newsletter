@@ -1,7 +1,10 @@
 #Open-Letters Newslettersystem
 
 Homepage: http://www.open-letters.de/
+
 Download: http://www.open-letters.de/download.html
+
+Danke an Open-Letters Webentwicklung für dieses Stück Software unter GPL :)
 
 ##Hinweis##
 Dieses Archiv beinhaltet Modifikationen und ist ein Test Archiv.
