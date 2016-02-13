@@ -6,6 +6,8 @@ Download: http://www.open-letters.de/download.html
 ##Hinweis##
 Dieses Archiv beinhaltet Modifikationen und ist ein Test Archiv.
 
+Mein Ziel ist die Umsetzung der Web Komponenten mittels Bootstrap.
+
 ##Modifikationen##
 
 ###/include/newsletter_form.view.php###
