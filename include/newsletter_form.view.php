@@ -14,9 +14,7 @@ echo("<form method=\"post\" action=\"" . filter_input(INPUT_SERVER, 'PHP_SELF') 
 <form class="form-horizontal">
     <?php
     if (isset($params['error'])) {
-        echo("<tr>\n");
-        echo("<td colspan=\"2\"><font color='#ff0000'>" . $params['error'] . "</font></td>\n");
-        echo("</tr>\n");
+        echo("<div class=\"form-group\"><p class=\"bg-danger\">" . $params['error'] . "</p></div>\n");
     }
     ?>
 <section>
@@ -24,7 +22,7 @@ echo("<form method=\"post\" action=\"" . filter_input(INPUT_SERVER, 'PHP_SELF') 
     <p class="bg-warning lead">i18n(form_star_description)</p>
   </div>
 </section>
-<section>
+<div class="col-md-3">
   <div class="form-group">
     <label for="gender" class="control-label">i18n(form_word_salutation)</label>
     <select name="title" id="gender" class="form-control">
@@ -33,8 +31,8 @@ echo("<form method=\"post\" action=\"" . filter_input(INPUT_SERVER, 'PHP_SELF') 
 	  <option value="Herr" <?php if ($params['title'] == "Herr") echo "selected"; ?> >i18n(form_word_mister)</option>
     </select>
   </div>
-</section>
-<section>
+</div>
+<div class="col-md-3">
   <div class="form-group">
     <label for="firstname" class="control-label">i18n(form_word_firstname)*</label>
     <input type="text" class="form-control" name="firstname"
@@ -45,8 +43,8 @@ echo("<form method=\"post\" action=\"" . filter_input(INPUT_SERVER, 'PHP_SELF') 
         echo "value=\"\" />"
       ?>
   </div>
-</section>
-<section>
+</div>
+<div class="col-md-3">
   <div class="form-group">
     <label for="name" class="control-label">i18n(form_word_lastname)*</label>
     <input type="text" class="form-control" name="name"
@@ -57,8 +55,8 @@ echo("<form method=\"post\" action=\"" . filter_input(INPUT_SERVER, 'PHP_SELF') 
         echo "value=\"\" />"
       ?>
   </div>
-</section>
-<section>
+</div>
+<div class="col-md-3">
   <div class="form-group">
     <label for="newsemail" class="control-label">i18n(form_word_mailaddress)*</label>
     <input type="email" class="form-control" name="newsemail" 
@@ -69,7 +67,7 @@ echo("<form method=\"post\" action=\"" . filter_input(INPUT_SERVER, 'PHP_SELF') 
         echo "value=\"\" />"
       ?>
   </div>
-</section>
+</div>
 <section>
   <div class="form-group">
     <input type="checkbox" name="newsagreement" value="newsletter_notice_accepted" class="news"> * i18n(form_newsagreement)
