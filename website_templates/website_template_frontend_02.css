@@ -16,3 +16,12 @@ body {
   color: inherit;
   margin-bottom: 30px;
 }
+.bg-warning {
+  font-size: 15px !important;
+  padding: 8px;
+}
+.bg-danger {
+  font-size: 15px !important;
+  font-weight: bold !important;
+  padding: 15px;
+}
