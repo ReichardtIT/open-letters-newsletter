@@ -11,21 +11,21 @@
 <?php
 echo("<form method=\"get\" action=\"" . $_SERVER['PHP_SELF'] . "?sendit\">\n");
 ?>
-<table width="100%" cellspacing="0" cellpadding="0" border="0">
-    <tr>
-        <td>i18n(newsletter_unsubscribe_form_text)</td>
-    </tr>
 
-    <tr>
-        <td>
-            <input class="news" type="text" name="unsubscribe" style="margin-bottom:7px;" />
-        </td>
-    </tr>
-
-    <tr>
-        <td align="right">
-            <input class="news" type="submit" value="i18n(form_unsubscribe_submit)" />
-        </td>
-    </tr>
-</table>
+<section>
+    <p class="bg-warning lead">i18n(newsletter_unsubscribe_form_text)</p>
+</section>
+<div class="row">
+<div class="col-md-8">
+  <div class="form-group">
+    <label for="unsubscribe" class="control-label">E-Mail Adresse</label>
+    <input type="text" class="form-control" name="unsubscribe" />
+  </div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+    <button type="submit" class="btn btn-default btn-lg" name="button">i18n(form_unsubscribe_submit)</button>
+</div>
+</div>
 </form>
